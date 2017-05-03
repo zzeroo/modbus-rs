@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Modbus",""]]});
+initSidebarItems({"enum":[["SerialMode",""]],"struct":[["Modbus",""]]});
