@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Modbus` struct in crate `modbus_rs`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Modbus">
+
+    <title>modbus_rs::modbus::Modbus - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    <link rel="shortcut icon" href="https://zzeroo.github.io/share/favicon.ico">
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        <a href='../../modbus_rs/index.html'><img src='https://zzeroo.github.io/share/zzeroo-logo.png' alt='logo' width='100'></a>
+        <p class='location'>Struct Modbus</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>modbus_rs</a>::<wbr><a href='index.html'>modbus</a></p><script>window.sidebarCurrent = {name: 'Modbus', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>modbus_rs</a>::<wbr><a href='index.html'>modbus</a>::<wbr><a class="struct" href=''>Modbus</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/modbus_rs/modbus.rs.html#9-11' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Modbus { /* fields omitted */ }</pre><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../modbus_rs/modbus/struct.Modbus.html" title="struct modbus_rs::modbus::Modbus">Modbus</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/modbus_rs/modbus.rs.html#13-242' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new_rtu' class="method"><span id='new_rtu.v' class='invisible'><code>fn <a href='#method.new_rtu' class='fnname'>new_rtu</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;device: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;baud: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;parity: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.char.html">char</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;data_bit: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;stop_bit: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a><br>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../modbus_rs/modbus/struct.Modbus.html" title="struct modbus_rs::modbus::Modbus">Modbus</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt;</code></span></h4>
+<div class='docblock'><p>create a libmodbus context for RTU</p>
+
+<p>The modbus_new_rtu() function shall allocate and initialize a modbus_t structure to communicate
+in RTU mode on a serial line.</p>
+
+<p>The device argument specifies the name of the serial port handled by the OS, eg. &quot;/dev/ttyS0&quot; or &quot;/dev/ttyUSB0&quot;.
+On Windows, it’s necessary to prepend COM name with &quot;\.&quot; for COM number greater than 9,
+eg. &quot;\\.\COM10&quot;. See <a href="http://msdn.microsoft.com/en-us/library/aa365247(v=vs.85).aspx">http://msdn.microsoft.com/en-us/library/aa365247(v=vs.85).aspx</a> for details
+The baud argument specifies the baud rate of the communication, eg. 9600, 19200, 57600, 115200, etc.</p>
+
+<p>The parity argument can have one of the following values
+    * N for none
+    * E for even
+    * O for odd</p>
+
+<p>The data_bits argument specifies the number of bits of data, the allowed values are 5, 6, 7 and 8.
+   The stop_bits argument specifies the bits of stop, the allowed values are 1 and 2.
+   Once the modbus_t structure is initialized, you must set the slave of your device with
+   modbus_set_slave(3) and connect to the serial bus with modbus_connect(3).</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">modbus_rs</span>::<span class="ident">Modbus</span>;
+<span class="kw">const</span> <span class="ident">YOUR_DEVICE_ID</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">1</span>;
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">modbus</span> <span class="op">=</span> <span class="ident">Modbus</span>::<span class="ident">new_rtu</span>(<span class="string">&quot;/dev/ttyUSB0&quot;</span>, <span class="number">115200</span>, <span class="string">&#39;N&#39;</span>, <span class="number">8</span>, <span class="number">1</span>).<span class="ident">unwrap</span>();
+<span class="ident">modbus</span>.<span class="ident">set_slave</span>(<span class="ident">YOUR_DEVICE_ID</span>);
+
+<span class="kw">match</span> <span class="ident">modbus</span>.<span class="ident">connect</span>() {
+    <span class="prelude-val">Ok</span>(_) <span class="op">=&gt;</span> {  }
+    <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Error: {}&quot;</span>, <span class="ident">e</span>),
+}</pre>
+</div><h4 id='method.rtu_get_serial_mode' class="method"><span id='rtu_get_serial_mode.v' class='invisible'><code>fn <a href='#method.rtu_get_serial_mode' class='fnname'>rtu_get_serial_mode</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a></code></span></h4>
+<div class='docblock'><p>get the current serial mode</p>
+
+<p>The modbus_rtu_get_serial_mode() function shall return the serial mode currently
+used by the libmodbus context:
+MODBUS_RTU_RS232
+    the serial line is set for RS232 communication. RS-232 (Recommended Standard 232)
+    is the traditional name for a series of standards for serial binary single-ended
+    data and control signals connecting between a DTE (Data Terminal Equipment) and a
+    DCE (Data Circuit-terminating Equipment). It is commonly used in computer serial ports
+MODBUS_RTU_RS485
+    the serial line is set for RS485 communication.
+    EIA-485, also known as TIA/EIA-485 or RS-485, is a standard defining the electrical
+    characteristics of drivers and receivers for use in balanced digital multipoint systems.
+    This standard is widely used for communications in industrial automation because it can be
+    used effectively over long distances and in electrically noisy environments.</p>
+
+<p>This function is only available on Linux kernels 2.6.28 onwards
+and can only be used with a context using a RTU backend.</p>
+
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">modbus_rs</span>::<span class="ident">Modbus</span>;
+<span class="kw">let</span> <span class="ident">modbus</span> <span class="op">=</span> <span class="ident">Modbus</span>::<span class="ident">new_rtu</span>(<span class="string">&quot;/dev/ttyUSB0&quot;</span>, <span class="number">115200</span>, <span class="string">&#39;N&#39;</span>, <span class="number">8</span>, <span class="number">1</span>).<span class="ident">unwrap</span>();
+
+<span class="comment">// assert_eq!(modbus.rtu_get_serial_mode(), SerialMode::MODBUS_RTU_RS232);</span>
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">modbus</span>.<span class="ident">rtu_get_serial_mode</span>(), <span class="number">0</span>);</pre>
+</div><h4 id='method.new_tcp' class="method"><span id='new_tcp.v' class='invisible'><code>fn <a href='#method.new_tcp' class='fnname'>new_tcp</a>(ip: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, port: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../modbus_rs/modbus/struct.Modbus.html" title="struct modbus_rs::modbus::Modbus">Modbus</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt;</code></span></h4>
+<div class='docblock'><p>create a libmodbus context for TCP/IPv4</p>
+
+<p>The modbus_new_tcp() function shall allocate and initialize a modbus_t structure
+to communicate with a Modbus TCP IPv4 server.
+The ip argument specifies the IP address of the server to which the client wants to
+establish a connection. A NULL value can be used to listen any addresses in server mode.
+The port argument is the TCP port to use. Set the port to MODBUS_TCP_DEFAULT_PORT
+to use the default one (502). It’s convenient to use a port number greater than or
+equal to 1024 because it’s not necessary to have administrator privileges.</p>
+
+<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">modbus_rs</span>::<span class="ident">Modbus</span>;
+<span class="kw">let</span> <span class="ident">modbus</span> <span class="op">=</span> <span class="ident">Modbus</span>::<span class="ident">new_tcp</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">1502</span>).<span class="ident">unwrap</span>();
+
+<span class="kw">match</span> <span class="ident">modbus</span>.<span class="ident">connect</span>() {
+    <span class="prelude-val">Ok</span>(_) <span class="op">=&gt;</span> {  }
+    <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Error: {}&quot;</span>, <span class="ident">e</span>),
+}</pre>
+</div><h4 id='method.connect' class="method"><span id='connect.v' class='invisible'><code>fn <a href='#method.connect' class='fnname'>connect</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt;</code></span></h4>
+<div class='docblock'><p>establish a Modbus connection</p>
+
+<p>The modbus_connect() function shall establish a connection to a Modbus server,
+a network or a bus using the context information of libmodbus context given in argument.</p>
+
+<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">modbus_rs</span>::<span class="ident">Modbus</span>;
+<span class="kw">let</span> <span class="ident">modbus</span> <span class="op">=</span> <span class="ident">Modbus</span>::<span class="ident">new_tcp</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">1502</span>).<span class="ident">unwrap</span>();
+
+<span class="kw">match</span> <span class="ident">modbus</span>.<span class="ident">connect</span>() {
+    <span class="prelude-val">Ok</span>(_) <span class="op">=&gt;</span> {  }
+    <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Error: {}&quot;</span>, <span class="ident">e</span>),
+}</pre>
+</div><h4 id='method.set_slave' class="method"><span id='set_slave.v' class='invisible'><code>fn <a href='#method.set_slave' class='fnname'>set_slave</a>(&amp;mut self, slave: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="struct" href="https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html" title="struct std::io::error::Error">Error</a>&gt;</code></span></h4>
+<div class='docblock'><p>set slave number in the context</p>
+
+<p>The modbus_set_slave() function shall set the slave number in the libmodbus context.
+The behavior depends of network and the role of the device:
+RTU
+Define the slave ID of the remote device to talk in master mode or set the internal slave ID in slave mode. According to the protocol, a Modbus device must only accept message holding its slave number or the special broadcast number.
+TCP
+The slave number is only required in TCP if the message must reach a device on a serial network. Some not compliant devices or software (such as modpoll) uses the slave ID as unit identifier, that’s incorrect (cf page 23 of Modbus Messaging Implementation Guide v1.0b) but without the slave value, the faulty remote device or software drops the requests! The special value MODBUS_TCP_SLAVE (0xFF) can be used in TCP mode to restore the default value.
+The broadcast address is MODBUS_BROADCAST_ADDRESS. This special value must be use when you want all Modbus devices of the network receive the request.</p>
+
+<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">modbus_rs</span>::<span class="ident">Modbus</span>;
+<span class="kw">const</span> <span class="ident">YOUR_DEVICE_ID</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">1</span>;
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">modbus</span> <span class="op">=</span> <span class="ident">Modbus</span>::<span class="ident">new_rtu</span>(<span class="string">&quot;/dev/ttyUSB0&quot;</span>, <span class="number">115200</span>, <span class="string">&#39;N&#39;</span>, <span class="number">8</span>, <span class="number">1</span>).<span class="ident">unwrap</span>();
+<span class="ident">modbus</span>.<span class="ident">set_slave</span>(<span class="ident">YOUR_DEVICE_ID</span>);
+
+<span class="kw">match</span> <span class="ident">modbus</span>.<span class="ident">connect</span>() {
+    <span class="prelude-val">Ok</span>(_) <span class="op">=&gt;</span> {}
+    <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Error: {}&quot;</span>, <span class="ident">e</span>),
+}</pre>
+</div><h4 id='method.close' class="method"><span id='close.v' class='invisible'><code>fn <a href='#method.close' class='fnname'>close</a>(&amp;self)</code></span></h4>
+<div class='docblock'><p>close a Modbus connection</p>
+
+<p>The modbus_close() function shall close the connection established with the backend set in the context.</p>
+
+<h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">modbus_rs</span>::<span class="ident">Modbus</span>;
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">modbus</span> <span class="op">=</span> <span class="ident">Modbus</span>::<span class="ident">new_tcp</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">1502</span>).<span class="ident">unwrap</span>();
+
+<span class="kw">match</span> <span class="ident">modbus</span>.<span class="ident">connect</span>() {
+    <span class="prelude-val">Ok</span>(_) <span class="op">=&gt;</span> {  }
+    <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Error: {}&quot;</span>, <span class="ident">e</span>),
+}
+
+<span class="ident">modbus</span>.<span class="ident">close</span>();
+<span class="ident">modbus</span>.<span class="ident">free</span>();</pre>
+</div><h4 id='method.free' class="method"><span id='free.v' class='invisible'><code>fn <a href='#method.free' class='fnname'>free</a>(&amp;mut self)</code></span></h4>
+<div class='docblock'><p>free a libmodbus context</p>
+
+<p>The modbus_free() function shall free an allocated modbus_t structure.</p>
+
+<h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">modbus_rs</span>::<span class="ident">Modbus</span>;
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">modbus</span> <span class="op">=</span> <span class="ident">Modbus</span>::<span class="ident">new_tcp</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">1502</span>).<span class="ident">unwrap</span>();
+
+<span class="kw">match</span> <span class="ident">modbus</span>.<span class="ident">connect</span>() {
+    <span class="prelude-val">Ok</span>(_) <span class="op">=&gt;</span> {  }
+    <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Error: {}&quot;</span>, <span class="ident">e</span>),
+}
+
+<span class="ident">modbus</span>.<span class="ident">close</span>();
+<span class="ident">modbus</span>.<span class="ident">free</span>();</pre>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html" title="trait core::ops::Drop">Drop</a> for <a class="struct" href="../../modbus_rs/modbus/struct.Modbus.html" title="struct modbus_rs::modbus::Modbus">Modbus</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/modbus_rs/modbus.rs.html#244-249' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class="method"><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span></h4>
+<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "modbus_rs";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>
