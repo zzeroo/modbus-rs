@@ -1,3 +1,8 @@
+
+# Dieses Repo bitte nicht benutzen. Es diente lediglich dem redesign des [libmodbus-rs](https://github.com/zzeroo/libmodbus-rs) Repo unter https://github.com/zzeroo/libmodbus-rs
+
+# Please, don't use this repository. It's exists only for testing purposes. Please use the correct [libmodbus-rs](https://github.com/zzeroo/libmodbus-rs) repository at https://github.com/zzeroo/libmodbus-rs
+
 # modbus-rs
 ## [libmodbus](http://libmodbus.org/) bindings for Rust [![Build Status](https://travis-ci.org/zzeroo/modbus-rs.svg?branch=master)](https://travis-ci.org/zzeroo/modbus-rs) [![Build status](https://ci.appveyor.com/api/projects/status/dfjyswsgj6menctw?svg=true)](https://ci.appveyor.com/project/zzeroo/modbus-rs)
 
